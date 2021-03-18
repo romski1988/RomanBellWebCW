@@ -4,10 +4,14 @@ const mongoose = require('mongoose');
 const MongoClient = require('mongodb').MongoClient;
 const flash = require('connect-flash');
 const session = require('express-session');
+const passport = require('passport');
 
 require('dotenv').config();
 
 const app = express();
+
+// Passport configuration
+require('./config/passport')(passport);
 
 // DB config
 //const db = require('./config/keys').MongoURI;
@@ -37,6 +41,10 @@ app.use(session({
     resave: true,
     saveUninitialized: true
   }));
+
+//Passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Conhnect Flash
 app.use(flash());
