@@ -71,12 +71,19 @@ router.post('/register', (req, res) => {
 });
 
 // Login Handler
-router.post('/login', (req, res) => {
+router.post('/login', (req, res, next) => {
     passport.authenticate('local', {
         successRedirect: '/dashboard',
         failureRedirect: '/users/login',
         failureFlash: true
     })(req, res, next);
+});
+
+// Logout Handler
+router.get('/logout', (req, res) => {
+    req.logout();
+    req.flash('success_msg', 'Logged out of Your Account');
+    res.redirect('/users/login');
 });
 
 module.exports = router;
