@@ -43,7 +43,6 @@ router.post('/register', (req, res) => {
         });
     } else{
         // Validation passed
-        // Email changed to username
         User.findOne({ username: username }).then(user => {
             if(user){
                 // User in DB
