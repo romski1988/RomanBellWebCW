@@ -12,6 +12,12 @@ router.get('/login', (req, res) => res.render('login'));
 // Register Page
 router.get('/register', (req, res) => res.render('register'));
 
+// User Management Page
+router.get('/userMan', (req, res) => res.render('userMan'));
+
+// User AB Test Page
+router.get('/abTest', (req, res) => res.render('abTest'));
+
 // Register Handler
 router.post('/register', (req, res) => {
     const { name, email, password, password2 } = req.body;
