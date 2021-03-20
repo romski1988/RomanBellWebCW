@@ -20,11 +20,11 @@ router.get('/abTest', (req, res) => res.render('abTest'));
 
 // Register Handler
 router.post('/register', (req, res) => {
-    const { name, email, password, password2 } = req.body;
+    const { username, email, password, password2 } = req.body;
     let errors = [];
 
     // Check required fields
-    if(!name || !email || !password || !password2){
+    if(!username || !email || !password || !password2){
         errors.push({ msg: 'All Fields must be filled' });
     }
     if(password !== password2){
@@ -36,27 +36,28 @@ router.post('/register', (req, res) => {
     if(errors.length > 0){
         res.render('register', {
             errors,
-            name,
+            username,
             email,
             password,
             password2
         });
     } else{
         // Validation passed
-        User.findOne({ email: email }).then(user => {
+        // Email changed to username
+        User.findOne({ username: username }).then(user => {
             if(user){
                 // User in DB
-                errors.push({ msg: 'Email is already used'});
+                errors.push({ msg: 'Username is already used'});
                 res.render('register', {
                     errors,
-                    name,
+                    username,
                     email,
                     password,
                     password2
                 });
             } else {
                 const newUser = new User({
-                    name,
+                    username,
                     email,
                     password
                 });

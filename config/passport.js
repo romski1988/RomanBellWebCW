@@ -7,11 +7,12 @@ const User = require('../models/User');
 
 module.exports = function(passport){
     passport.use(
-        new LocalStrategy({usernameField: 'email'}, (email, password, done) =>{
+        // Changed from email to username
+        new LocalStrategy({usernameField: 'username'}, (username, password, done) =>{
             // Match the user
-            User.findOne({email: email }).then(user => {
+            User.findOne({username: username }).then(user => {
                 if(!user){
-                    return done(null, false, {message: 'The email is not registered'});
+                    return done(null, false, {message: 'The username is not registered'});
                 }
                 // Match password
                 bcrypt.compare(password, user.password, (err, isMatch) => {
