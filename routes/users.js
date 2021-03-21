@@ -92,4 +92,5 @@ router.get('/logout', (req, res) => {
     res.redirect('/users/login');
 });
 
+// Export Router
 module.exports = router;

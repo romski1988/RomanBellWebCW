@@ -4,14 +4,27 @@
 <%- include('partials/navbar') %>
 <!-- <a href="/users/logout" class="btn btn-secondary">Logout</a> -->
 
-<div class="row mt-5">
-    <div class="col-md-6 m-auto">
-        <p class="lead mb-3"><%= username %> please let us know what type of car you like.</p>
-      <div class="card card-body text-center">
-        <img src="/images/classicCar.png">
-        <a href="#" class="btn btn-primary btn-block mb-3">Vote for Classic Car</a>
-        <img src="/images/modernCar.png">
-        <a href="#" class="btn btn-secondary btn-block">Vote for Modern Car</a>
-      </div>
-    </div>
-  </div>
+    <!-- FROM HERE -->
+    <div class="container mt-5">
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% users.forEach((username)=> { %>
+                        <tr>
+                            <td><%= username.username %></td>
+                            <td><%= username.email %></td>
+                            <td>
+                                <th>
+                                    <a href="/delete/<%= username.id %>" class='link-warning'> Delete </a>
+                                </th>
+                            </td>
+                        </tr>
+                   <% }) %>
+                </tbody>
+            </table>
+        </div>

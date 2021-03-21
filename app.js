@@ -5,6 +5,7 @@ const MongoClient = require('mongodb').MongoClient;
 const flash = require('connect-flash');
 const session = require('express-session');
 const passport = require('passport');
+const dotenv = require('dotenv');
 
 require('dotenv').config();
 
@@ -46,7 +47,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Conhnect Flash
+// Connect Flash
 app.use(flash());
 
 // Global Variables
