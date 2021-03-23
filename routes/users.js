@@ -3,8 +3,9 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
 
-// User Model
+// User and Car Model
 const User = require('../models/User');
+const Count = require('../models/Count');
 
 // Login Page
 router.get('/login', (req, res) => res.render('login'));
@@ -16,7 +17,28 @@ router.get('/register', (req, res) => res.render('register'));
 router.get('/userMan', (req, res) => res.render('userMan'));
 
 // User AB Test Page
-router.get('/abTest', (req, res) => res.render('abTest'));
+//router.get('/abTest', (req, res) => res.render('abTest'));
+
+router.get('/abTest', (req, res) => {
+    var query = {};
+    Count.find(query).select('carType clickCount')
+    .then(counts => {
+        var classicCount = 0;
+        var modernCount = 0;
+        for(var i=0; i<counts.length; i++){
+            if(counts[i].carType == 'classicCar'){
+                classicCount = counts[i].clickCount;
+            }
+            if(counts[i].carType == 'modernCar'){
+                modernCount = counts[i].clickCount;
+            }
+        }
+        res.render('abTest', {modernCount: modernCount, classicCount: classicCount })})
+    .catch(err=>{
+        console.log(err);
+    });
+});
+
 
 // Register Handler
 router.post('/register', (req, res) => {
