@@ -14,11 +14,10 @@ router.get('/login', (req, res) => res.render('login'));
 router.get('/register', (req, res) => res.render('register'));
 
 // User Management Page
-router.get('/userMan', (req, res) => res.render('userMan'));
+//router.get('/userMan', (req, res) => res.render('userMan'));
 
 // User AB Test Page
 //router.get('/abTest', (req, res) => res.render('abTest'));
-
 router.get('/abTest', (req, res) => {
     var query = {};
     Count.find(query).select('carType clickCount')

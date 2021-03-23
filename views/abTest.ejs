@@ -1,10 +1,18 @@
 <h1 class="mt-4">A-B Test</h1>
-<p class="lead mb-3">Welcome</p>
 <%- include('partials/navbar') %>
+
+<style>
+  table, th, td {
+    border: 1px solid black;
+  }
+  td {
+    text-align: center;
+  }
+</style>
 
 <div class="row mt-5">
     <div class="col-md-6 m-auto">
-        <p class="lead mb-3">please let us know what type of car you like.</p>
+        <p class="lead m-auto text-center">Please let us know what type of car you like.</p>
       <div class="card card-body text-center">
         <img src="/images/classicCar.png">
         <a href="/increase/classicCar" class="btn btn-primary btn-block mb-3">Vote for Classic Car</a>
@@ -12,10 +20,16 @@
         <img src="/images/modernCar.png">
         <a href="/increase/modernCar" class="btn btn-secondary btn-block">Vote for Modern Car</a>
       </div>
+      <h3 class="col-md-6 m-auto">Button click Results:</h3>
+      <table class="col-md-6 m-auto">
+        <tr>
+          <th>Classic car count</th>
+          <th>Moder car count</th> 
+        </tr>
+        <tr>
+          <td><%= classicCount %></td>
+          <td><%= modernCount %></td>
+        </tr>
+      </table>
     </div>
-  </div>
-  <h2>COUNT TABLE</h2>
-  <p>Modern count:</p>
-  <p> <%= modernCount %></p>
-  <p> Classic Count: </p>
-  <p> <%= classicCount %></p>
+</div>
